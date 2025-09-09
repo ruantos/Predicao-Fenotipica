@@ -10,7 +10,7 @@ Este projeto visa implementar uma pipeline ETL, realizar análise exploratória 
 
 ## Material base
 
-- __Tema:__ 
+- __Tema:__ <br/>
 _ANÁLISE DE ASSOCIAÇÃO DOS POLIMORFISMOS DOS GENES ASIP, SLC45A2, SLC24A5 E OCA2 COM CARACTERÍSTICAS DE PIGMENTAÇÃO DA PELE NA POPULAÇÃO DA REGIÃO METROPOLITANA DO RECIFE_
 
 - __Autor:__ WILLIAMS TAURINO DE PAULA JÚNIOR
