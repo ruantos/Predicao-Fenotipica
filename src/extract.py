@@ -1,0 +1,46 @@
+import pandas as pd
+import dotenv
+import os
+import gspread
+
+dotenv.load_dotenv()
+
+id_list = {
+	'spreadsheet_id': os.environ.get("SPREADSHEET_ID"),
+	'sheet_id_main': os.environ.get("SHEET_ID_GERAL"),
+	'sheet_id_genotypes': os.environ.get("SHEET_ID_GENOTIPOS")
+}
+
+
+def fetch_sheets(ids: dict[str, str]) -> tuple[pd.DataFrame, pd.DataFrame] | None:
+	"""
+	Connects with Google client's bot, fetch the sheets that'll be used by its ids
+	and return them as pandas Dataframes
+	"""
+	try:
+		gclient = gspread.service_account(filename='../.auth.json')
+		spreadsheet = gclient.open_by_key(ids['spreadsheet_id'])
+
+		data_genotypes = (spreadsheet
+		                  .get_worksheet_by_id(ids['sheet_id_genotypes'])
+		                  .get_all_records())
+		data_main = (spreadsheet
+		             .get_worksheet_by_id(ids['sheet_id_main'])
+		             .get_all_records())
+
+		return pd.DataFrame(data_main),  pd.DataFrame(data_genotypes, )
+
+	except Exception as e:
+		print(f'Error caught while fetching sheets: {e}')
+		return None
+
+
+
+if __name__ == '__main__':
+	try:
+		df_main, df_genotypes = fetch_sheets(id_list)
+		print(df_main.columns)
+		print(df_genotypes.columns)
+
+	except Exception as e:
+		pass
