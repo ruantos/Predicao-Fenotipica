@@ -33,14 +33,3 @@ def fetch_sheets(ids: dict[str, str]) -> tuple[pd.DataFrame, pd.DataFrame] | Non
 	except Exception as e:
 		print(f'Error caught while fetching sheets: {e}')
 		return None
-
-
-
-if __name__ == '__main__':
-	try:
-		df_main, df_genotypes = fetch_sheets(id_list)
-		print(df_main.columns)
-		print(df_genotypes.columns)
-
-	except Exception as e:
-		pass
