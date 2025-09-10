@@ -13,13 +13,10 @@ id_list = {
 
 
 def fetch_sheets(ids: dict[str, str]) -> tuple[pd.DataFrame, pd.DataFrame] | None:
-	"""
-	Connects with Google client's bot, fetch the sheets that'll be used by its ids
-	and return them as pandas Dataframes
-	"""
+
 	try:
-		gclient = gspread.service_account(filename='../.auth.json')
-		spreadsheet = gclient.open_by_key(ids['spreadsheet_id'])
+		google_client = gspread.service_account(filename='../.auth.json')
+		spreadsheet = google_client.open_by_key(ids['spreadsheet_id'])
 
 		data_genotypes = (spreadsheet
 		                  .get_worksheet_by_id(ids['sheet_id_genotypes'])
