@@ -1,4 +1,4 @@
-# 🧬 Polimorfismo genético & Características fenótipas  
+# 🧬 Predição Fenotípica a partir de Polimorfismo genético 
 
 - 📊 Este projeto visa implementar uma pipeline ETL, realizar análise exploratória (EDA) e se utilizar dos dados processados para treinamento e predição com modelos de Machine Learning
 - Pretende-se analisar a associação dos SNPs dos genes ASIP, SLC45A2, SLC24A5 e OCA2 com as características externamente visíveis 
