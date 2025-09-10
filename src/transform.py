@@ -1,5 +1,5 @@
 import pandas as pd
-from extract import fetch_sheets
+
 
 COLS_TO_DROP = {
 	'main':
@@ -49,10 +49,3 @@ def transform(df_1: pd.DataFrame, df_2: pd.DataFrame) -> pd.DataFrame:
 	df = df.set_index('id_voluntario')
 
 	return df
-
-
-if __name__ == '__main__':
-	df_1, df_2 = fetch_sheets()
-	df = transform(df_1, df_2)
-	print(df.info())
-	
