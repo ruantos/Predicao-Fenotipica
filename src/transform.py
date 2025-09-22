@@ -46,6 +46,6 @@ def transform(df_1: pd.DataFrame, df_2: pd.DataFrame) -> pd.DataFrame:
 
 	df = join_dataframes(df_1, df_2)
 	df = rename_columns(df)
-	df = df.set_index('id_voluntario')
+
 
 	return df
