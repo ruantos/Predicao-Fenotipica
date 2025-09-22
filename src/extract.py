@@ -3,14 +3,6 @@ import dotenv
 import os
 import gspread
 
-dotenv.load_dotenv()
-
-id_list = {
-	'spreadsheet_id': os.environ.get("SPREADSHEET_ID"),
-	'sheet_id_main': os.environ.get("SHEET_ID_GERAL"),
-	'sheet_id_genotypes': os.environ.get("SHEET_ID_GENOTIPOS")
-}
-
 
 def fetch_sheets(ids: dict[str, str]) -> tuple[pd.DataFrame, pd.DataFrame] | None:
 
