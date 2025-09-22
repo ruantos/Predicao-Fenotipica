@@ -15,10 +15,20 @@ def connect(project_url: str, api_key: str):
 		return None
 
 
-def insert_records(client, records: dict):
-	client.table('registros')
-	.insert(records)
-	.execute()
+def insert_records(client, df):
+	records = df.to_dict('records')
+
+	try:
+		if records:
+			(
+			client.table('individuos')
+		    .insert(records)
+		    .execute()
+		    )
+		else:
+			print('Records list is empty')
+	except Exception as e:
+		print(f"Error caught while trying to insert records: {e}")
 
 
 if __name__ == "__main__":
@@ -27,6 +37,7 @@ if __name__ == "__main__":
 	URL = os.getenv("SUPA_URL")
 	KEY = os.getenv("SUPA_KEY")
 	connect(URL, KEY)
+
 
 
 
