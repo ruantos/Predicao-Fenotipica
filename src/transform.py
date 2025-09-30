@@ -33,10 +33,6 @@ def drop_columns(df: pd.DataFrame, sheet: int = 1) -> pd.DataFrame:
 def join_dataframes(df_1: pd.DataFrame, df_2: pd.DataFrame) -> pd.DataFrame:
 	return df_1.join(df_2, how='outer')
 
-def reduce_col_sex(df: pd.DataFrame) -> pd.DataFrame:
-	df['sexo'] = df['sexo'].str[0]
-	return df
-
 
 def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
 	return df.rename(columns={
@@ -58,7 +54,6 @@ def transform(dfs: list[pd.DataFrame]) -> pd.DataFrame:
 	df = join_dataframes(df_1, df_2)
 	df = concatenate_dfs(df, df_3)
 	df = rename_columns(df)
-	df = reduce_col_sex(df)
 
 
 	return df
