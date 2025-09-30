@@ -1,10 +1,8 @@
 import pandas as pd
-import dotenv
-import os
 import gspread
 
 
-def fetch_sheets(ids: dict[str, str]) -> tuple[pd.DataFrame, pd.DataFrame] | None:
+def fetch_sheets(ids: dict[str, str]) -> list[pd.DataFrame] | None:
 
 	try:
 		google_client = gspread.service_account(filename='../.auth.json')
@@ -17,7 +15,11 @@ def fetch_sheets(ids: dict[str, str]) -> tuple[pd.DataFrame, pd.DataFrame] | Non
 		             .get_worksheet_by_id(ids['sheet_id_main'])
 		             .get_all_records())
 
-		return pd.DataFrame(data_main),  pd.DataFrame(data_genotypes, )
+		data_jul = (spreadsheet
+		             .get_worksheet_by_id(ids['sheet_id_juliana'])
+		             .get_all_records())
+
+		return [pd.DataFrame(data_main),  pd.DataFrame(data_genotypes),  pd.DataFrame(data_jul)]
 
 	except Exception as e:
 		print(f'Error caught while fetching sheets: {e}')
