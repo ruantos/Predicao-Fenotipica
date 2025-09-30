@@ -46,6 +46,21 @@ def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
 def concatenate_dfs(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
 	return pd.concat([df1, df2], ignore_index=True)
 
+
+def capitalize_columns(df: pd.DataFrame) -> pd.DataFrame:
+	df['cor_pele'] = df['cor_pele'].str.capitalize()
+	return df
+
+
+def standardize_skin_color(df: pd.DataFrame) -> pd.DataFrame:
+	df['cor_pele'] = (df['cor_pele'].replace('Moreno', 'Morena')
+	 .replace('Preto', 'Preta')
+	 .replace('Negro', 'Preta')
+	 .replace('Branco', 'Branca'))
+
+	return df
+
+
 def transform(dfs: list[pd.DataFrame]) -> pd.DataFrame:
 	df_1 = drop_columns(dfs[0], 1)
 	df_2 = drop_columns(dfs[1], 2)
@@ -54,6 +69,8 @@ def transform(dfs: list[pd.DataFrame]) -> pd.DataFrame:
 	df = join_dataframes(df_1, df_2)
 	df = concatenate_dfs(df, df_3)
 	df = rename_columns(df)
+	df = capitalize_columns(df)
+	df = standardize_skin_color(df)
 
 
 	return df
