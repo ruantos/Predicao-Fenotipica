@@ -74,6 +74,16 @@ def standardize_hair_color(df: pd.DataFrame) -> pd.DataFrame:
 	return df
 
 
+def standardize_eye_color(df: pd.DataFrame) -> pd.DataFrame:
+	df['cor_olhos'] = (
+		df['cor_olhos']
+		.replace('Mel', 'Castanho')
+		.replace('Castanho escuro', 'Castanho')
+		.replace('Castanho claro', 'Castanho')
+		)
+	return df
+
+
 def address_null_values(df: pd.DataFrame) -> pd.DataFrame:
 	df['rs1426654'] = df['rs1426654'].replace('', np.nan)
 	df['rs6058017'] = df['rs6058017'].replace('', np.nan)
@@ -94,6 +104,7 @@ def transform(dfs: list[pd.DataFrame]) -> pd.DataFrame:
 	df = capitalize_columns(df)
 	df = standardize_skin_color(df)
 	df = standardize_hair_color(df)
+	df = standardize_eye_color(df)
 	df = address_null_values(df)
 
 
