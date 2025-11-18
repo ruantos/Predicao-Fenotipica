@@ -59,7 +59,8 @@ def standardize_skin_color(df: pd.DataFrame) -> pd.DataFrame:
 	df['cor_pele'] = (df['cor_pele'].replace('Moreno', 'Morena')
 	 .replace('Preto', 'Preta')
 	 .replace('Negro', 'Preta')
-	 .replace('Branco', 'Branca'))
+	 .replace('Branco', 'Branca')
+	 .replace('Morena', 'Parda'))
 
 	return df
 
@@ -68,17 +69,29 @@ def standardize_hair_color(df: pd.DataFrame) -> pd.DataFrame:
 	df['cor_cabelo_15_anos'] = (
 		df['cor_cabelo_15_anos']
 		.replace('Castanhos', 'Castanho')
+		.replace('Castanho escuro', 'Castanho')
+		.replace('Castanho claro', 'Castanho')
 		.replace('Loiros', 'Louro')
 		.replace('Castanhos', 'Castanho')
 		)
 	return df
 
 
+def standardize_eye_color(df: pd.DataFrame) -> pd.DataFrame:
+	df['cor_olhos'] = (
+		df['cor_olhos']
+		.replace('Mel', 'Castanho')
+		.replace('Castanho escuro', 'Castanho')
+		.replace('Castanho claro', 'Castanho')
+		)
+	return df
+
+
 def address_null_values(df: pd.DataFrame) -> pd.DataFrame:
-	df['rs1426654'] = df['rs1426654'].replace('', np.nan)
-	df['rs6058017'] = df['rs6058017'].replace('', np.nan)
-	df['rs1800404'] = df['rs1800404'].replace('', np.nan)
-	df['rs16891982'] = df['rs16891982'].replace('', np.nan)
+	df['rs1426654'] = df['rs1426654'].replace('', None)
+	df['rs6058017'] = df['rs6058017'].replace('', None)
+	df['rs1800404'] = df['rs1800404'].replace('', None)
+	df['rs16891982'] = df['rs16891982'].replace('', None)
 
 	return df
 
@@ -94,6 +107,7 @@ def transform(dfs: list[pd.DataFrame]) -> pd.DataFrame:
 	df = capitalize_columns(df)
 	df = standardize_skin_color(df)
 	df = standardize_hair_color(df)
+	df = standardize_eye_color(df)
 	df = address_null_values(df)
 
 
